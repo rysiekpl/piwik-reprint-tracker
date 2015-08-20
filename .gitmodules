@@ -1,0 +1,3 @@
+[submodule "piwik-php-tracker"]
+	path = piwik-php-tracker
+	url = https://github.com/piwik/piwik-php-tracker.git
