@@ -22,6 +22,7 @@ require_once('..' . DIRECTORY_SEPARATOR . 'config.php');
 # piwik tracker -- it also has to exist
 require_once('..' . DIRECTORY_SEPARATOR . 'piwik-php-tracker' . DIRECTORY_SEPARATOR . 'PiwikTracker.php');
 
+define("DEBUG", true);
 
 # handle the tracking
 function track($campaign, $keyword) {
@@ -61,18 +62,24 @@ function track($campaign, $keyword) {
     # 1 - keyword
     # 2 - timestamp
     # 3 - referrer
-    $piwik->setAttributionInfo(
-        json_encode(array(
-            0 => $campaign,
-            1 => $keyword,
-            2 => 0,
-            3 => $_SERVER['HTTP_REFERER']
-        ))
-    );
+    $att = json_encode(array(
+            $campaign,
+            $keyword,
+            time(),
+            $_SERVER['HTTP_REFERER']
+        ));
+    $piwik->setAttributionInfo($att);
+    if (defined("DEBUG") and DEBUG) {
+        header("X-Debug-Referred: from " . $_SERVER['HTTP_REFERER']);
+        header("X-Debug-AttInfo: $att");
+    }
     
     # do track the page view
     if (empty($keyword)) $keyword = 'none';
     $piwik->doTrackPageView("Reprint Tracker for: $campaign (keyword: $keyword)");
+    if (defined("DEBUG") and DEBUG) {
+        header('X-Last-Piwik-Call: ' . $piwik::$DEBUG_LAST_REQUESTED_URL);
+    }
 }
 
 
