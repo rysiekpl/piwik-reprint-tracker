@@ -40,7 +40,7 @@ function track($campaign, $keyword) {
     );
     # User Agent String of the client
     $piwik->setUserAgent(
-        $_SERVER['HTTP_USER_AGENT'];
+        $_SERVER['HTTP_USER_AGENT']
     );
 
     # get the schema
