@@ -140,13 +140,13 @@ function campaign_image($campaign, $exts) {
     $imgdir = '..' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
     
     # $campaign-based image?
-    for ($exts as $ext) {
+    foreach ($exts as $ext) {
         if (file_exists("${imgdir}$campaign.$ext") and is_readable("${imgdir}$campaign.$ext"))
             return "${imgdir}$campaign.$ext";
     }
     
     # default.$ext?
-    for ($exts as $ext) {
+    foreach ($exts as $ext) {
         if (file_exists("${imgdir}default.$ext") and is_readable("${imgdir}default.$ext"))
             return "${imgdir}default.$ext";
     }
