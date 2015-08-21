@@ -61,7 +61,7 @@ function track($campaign, $keyword) {
     # 1 - keyword
     # 2 - timestamp
     # 3 - referrer
-    $piwik->setAttributionInfo()
+    $piwik->setAttributionInfo(
         json_encode(array(
             0 => $campaign,
             1 => $keyword,
