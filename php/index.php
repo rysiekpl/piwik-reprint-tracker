@@ -102,7 +102,7 @@ function campaign_data() {
     # is it an image URI?
     # form: campaign_name.keyword.ext or just campaign_name.ext
     $matches = array();
-    if (preg_match('^([a-zA-Z1-9\-_]+)(\.[a-zA-Z1-9\-_]+)?\.(' . join('|', $GLOBALS['config']['image_extensions']) . ')$', $r_uri, $matches) === 1) {
+    if (preg_match('/^([a-zA-Z1-9\-_]+)(\.[a-zA-Z1-9\-_]+)?\.(' . join('|', $GLOBALS['config']['image_extensions']) . ')$/', $r_uri, $matches) === 1) {
     
         # let's get campaign and keywords out of it!
         # campaign is easy, it is non-optional in the regex above
